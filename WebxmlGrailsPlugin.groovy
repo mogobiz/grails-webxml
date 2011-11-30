@@ -46,9 +46,9 @@ class WebxmlGrailsPlugin {
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPWEBXML']
 	def scm = [url: 'http://plugins.grails.org/grails-webxml/']
 	def developers = [
-		[name: "Eric Pederson", email: "ericacm@gmail.com"],
-		[name: "Bob Schulze",   email: "al.lias@gmx.de"],
-		[name: "Burt Beckwith", email: "beckwithb@vmware.com"],
+		[name: "Eric Pederson",  email: "ericacm@gmail.com"],
+		[name: "Bob Schulze",    email: "al.lias@gmx.de"],
+		[name: "Burt Beckwith",  email: "beckwithb@vmware.com"],
 		[name: "Stefano Gualdi", email: "stefano.gualdi@gmail.com"]
 	]
 
@@ -107,19 +107,19 @@ class WebxmlGrailsPlugin {
 			}
 		}
 
-        //session Timeout
-        if (config.sessionConfig?.sessionTimeout && (config.sessionConfig?.sessionTimeout instanceof Integer)){
-            def contextParam = xml."context-param"
-            contextParam[contextParam.size() - 1] + {
-                'session-config'{
-                    'session-timeout'(config.sessionConfig.sessionTimeout)
-                }
-            }
-        }
+		//session Timeout
+		if (config.sessionConfig.sessionTimeout instanceof Integer) {
+			def contextParam = xml."context-param"
+			contextParam[contextParam.size() - 1] + {
+				'session-config'{
+					'session-timeout'(config.sessionConfig.sessionTimeout)
+				}
+			}
+		}
 
-        if (log.isTraceEnabled()) {
-            log.trace new StreamingMarkupBuilder().bind { out << xml }
-        }
+		if (log.isTraceEnabled()) {
+			log.trace new StreamingMarkupBuilder().bind { out << xml }
+		}
 	}
 
 	private getConfig() {
