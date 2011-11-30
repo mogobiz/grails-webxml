@@ -18,14 +18,16 @@
  * To override values, create a file called YOUR-APP/grails-app/conf/WebXmlConfig.groovy
  */
 webxml {
-    filterChainProxyDelegator.add = false
-    filterChainProxyDelegator.targetBeanName = "filterChainProxyDelegate"
-    filterChainProxyDelegator.urlPattern = "/*"
-    filterChainProxyDelegator.filterName = "filterChainProxyDelegator"
-    filterChainProxyDelegator.className = "org.springframework.web.filter.DelegatingFilterProxy"
+	filterChainProxyDelegator.add = false
+	filterChainProxyDelegator.targetBeanName = "filterChainProxyDelegate"
+	filterChainProxyDelegator.urlPattern = "/*"
+	filterChainProxyDelegator.filterName = "filterChainProxyDelegator"
+	filterChainProxyDelegator.className = "org.springframework.web.filter.DelegatingFilterProxy"
 
-    listener.add = false
-    //listener.classNames = ["org.springframework.web.context.request.RequestContextListener"]
+	listener.add = false
+	//listener.classNames = ["org.springframework.web.context.request.RequestContextListener"]
 
-    contextparams = [sample: 'Sample Value']
+	contextparams = [sample: 'Sample Value']
+
+//	sessionConfig.sessionTimeout = 30
 }
