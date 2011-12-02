@@ -38,7 +38,7 @@ class WebxmlGrailsPlugin {
 	def grailsVersion = '1.2 > *'
 	def author = "Roger Cass"
 	def authorEmail = "roger.cass@byu.net"
-	def title = "Create useful additions to web.xml"
+	def title = "WebXmlConfig"
 	def description = 'Add additional Features to your web.xml, such as Filters, Config Listeners or Context Parameter definitions'
 	def documentation = "http://grails.org/plugin/webxml"
 
