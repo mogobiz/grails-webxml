@@ -57,12 +57,12 @@ private void fixWebXml() {
 	webXmlFile.withWriter { it << XmlUtil.serialize(wxml) }
 }
 
-private Set<String> findFilterMappingNames(dom) {
-	Set names = []
+private List<String> findFilterMappingNames(dom) {
+	List names = []
 
 	use (DOMCategory) {
 		def mappingNodes = dom.'filter-mapping'
-		mappingNodes.each { n ->
+		for (n in mappingNodes) {
 			names << n.'filter-name'.text()
 		}
 	}
@@ -80,8 +80,8 @@ private void sortFilterMappingNodes(dom, orderedFilterNames) {
 			followingNode = mappingNodes[-1].nextSibling
 
 			Set doneFilters = []
-			orderedFilterNames.each { f ->
-				mappingNodes.each { n ->
+			for (f in orderedFilterNames) {
+				for (n in mappingNodes) {
 					def filterName = n.'filter-name'.text()
 					if (!(filterName in doneFilters)) {
 						if (filterName == f || (f == '*' && !orderedFilterNames.contains(filterName))) {
