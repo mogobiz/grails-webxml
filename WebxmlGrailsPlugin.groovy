@@ -29,27 +29,27 @@ import org.slf4j.LoggerFactory
  */
 class WebxmlGrailsPlugin {
 
-	private static final String DEFAULT_CONFIG_FILE = "DefaultWebXmlConfig"
-	private static final String APP_CONFIG_FILE     = "WebXmlConfig"
+	private static final String DEFAULT_CONFIG_FILE = 'DefaultWebXmlConfig'
+	private static final String APP_CONFIG_FILE     = 'WebXmlConfig'
 
 	private Logger log = LoggerFactory.getLogger('grails.plugin.webxml.WebxmlGrailsPlugin')
 
-	def version = "1.4.1"
+	def version = '1.4.1'
 	def grailsVersion = '1.2 > *'
-	def author = "Roger Cass"
-	def authorEmail = "roger.cass@byu.net"
-	def title = "WebXmlConfig"
-	def description = 'Add additional Features to your web.xml, such as Filters, Config Listeners or Context Parameter definitions'
-	def documentation = "http://grails.org/plugin/webxml"
+	def author = 'Roger Cass'
+	def authorEmail = 'roger.cass@byu.net'
+	def title = 'web.xml plugin'
+	def description = 'Add additional features to your web.xml, such as Filters, Config Listeners or Context Parameter definitions'
+	def documentation = 'http://grails.org/plugin/webxml'
 
 	def license = 'APACHE'
 	def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPWEBXML']
 	def scm = [url: 'http://plugins.grails.org/grails-webxml/']
 	def developers = [
-		[name: "Eric Pederson",  email: "ericacm@gmail.com"],
-		[name: "Bob Schulze",    email: "al.lias@gmx.de"],
-		[name: "Burt Beckwith",  email: "beckwithb@vmware.com"],
-		[name: "Stefano Gualdi", email: "stefano.gualdi@gmail.com"]
+		[name: 'Eric Pederson',  email: 'ericacm@gmail.com'],
+		[name: 'Bob Schulze',    email: 'al.lias@gmx.de'],
+		[name: 'Burt Beckwith',  email: 'beckwithb@vmware.com'],
+		[name: 'Stefano Gualdi', email: 'stefano.gualdi@gmail.com']
 	]
 
 	def doWithWebDescriptor = { xml ->
@@ -59,7 +59,7 @@ class WebxmlGrailsPlugin {
 		}
 
 		if (config.filterChainProxyDelegator.add) {
-			def contextParam = xml."context-param"
+			def contextParam = xml.'context-param'
 			contextParam[contextParam.size() - 1] + {
 				'filter' {
 					'filter-name'(config.filterChainProxyDelegator.filterName)
@@ -71,7 +71,7 @@ class WebxmlGrailsPlugin {
 				}
 			}
 
-			def filter = xml."filter"
+			def filter = xml.'filter'
 			filter[filter.size() - 1] + {
 				'filter-mapping' {
 					'filter-name'(config.filterChainProxyDelegator.filterName)
@@ -81,7 +81,7 @@ class WebxmlGrailsPlugin {
 		}
 
 		if (config.listener.add) {
-			def listenerNode = xml."listener"
+			def listenerNode = xml.'listener'
 
 			for (String className in config.listener.classNames) {
 				listenerNode[listenerNode.size() - 1] + {
@@ -97,7 +97,7 @@ class WebxmlGrailsPlugin {
 		// be a good idea...  (bs)
 		if (config.contextparams) {
 			config.contextparams.each { String name, String value ->
-				def contextParam = xml."context-param"
+				def contextParam = xml.'context-param'
 				contextParam[contextParam.size() - 1] + {
 					'context-param' {
 						'param-name'(name)
@@ -109,7 +109,7 @@ class WebxmlGrailsPlugin {
 
 		//session Timeout
 		if (config.sessionConfig.sessionTimeout instanceof Integer) {
-			def contextParam = xml."context-param"
+			def contextParam = xml.'context-param'
 			contextParam[contextParam.size() - 1] + {
 				'session-config'{
 					'session-timeout'(config.sessionConfig.sessionTimeout)
