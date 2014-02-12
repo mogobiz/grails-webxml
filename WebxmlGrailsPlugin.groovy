@@ -122,6 +122,17 @@ class WebxmlGrailsPlugin {
 			}
 		}
 
+		if(config.customXml){
+			config.customXml.each {cfg->
+				def nodes = xml."${cfg.after}"
+				def lastElem = nodes[nodes.size()-1]
+				def closure = cfg.xml
+				lastElem + {
+					"${cfg.tag}" closure
+				}
+			}
+		}
+
 		if (log.isTraceEnabled()) {
 			log.trace new StreamingMarkupBuilder().bind { out << xml }
 		}
