@@ -113,14 +113,23 @@ class WebxmlGrailsPlugin {
 		}
 
 		//session Timeout
-		if (config.sessionConfig.sessionTimeout instanceof Integer) {
-			def contextParam = xml.'context-param'
-			contextParam[contextParam.size() - 1] + {
-				'session-config'{
-					'session-timeout'(config.sessionConfig.sessionTimeout)
-				}
-			}
-		}
+	    def sessionTimeoutValue = config.sessionConfig.sessionTimeout
+	    if (sessionTimeoutValue instanceof Integer) {
+	      	def sessionConfig = xml.'session-config'
+	      	if (!sessionConfig) {
+	        	def contextParam = xml.'context-param'
+	        	contextParam[contextParam.size() - 1] + {
+          			'session-config'{
+            			'session-timeout'(sessionTimeoutValue)
+          			}
+	        	}
+	      	} else {
+	        	def sessionTimeout = xml.'session-config'.'session-timeout'[0]
+	          	sessionTimeout.replaceNode {
+              		'session-timeout'(sessionTimeoutValue)
+	          	}
+	      	}
+	    }
 
 		if (log.isTraceEnabled()) {
 			log.trace new StreamingMarkupBuilder().bind { out << xml }
