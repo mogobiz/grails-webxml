@@ -1,3 +1,5 @@
+package grails.plugins.webxml
+
 import grails.util.Environment
 import groovy.xml.StreamingMarkupBuilder
 import groovy.xml.XmlUtil
@@ -35,7 +37,7 @@ class WebxmlGrailsPlugin {
 	private Logger log = LoggerFactory.getLogger('grails.plugin.webxml.WebxmlGrailsPlugin')
 
 	def version = '1.4.1'
-	def grailsVersion = '1.2 > *'
+	def grailsVersion = '3.0 > *'
 	def author = 'Roger Cass'
 	def authorEmail = 'roger.cass@byu.net'
 	def title = 'web.xml plugin'
